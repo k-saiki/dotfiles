@@ -3,33 +3,19 @@
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
+source $HOME/.git-completion.bash
+source $HOME/.git-prompt.sh
+
+GIT_PS1_SHOWDIRTYSTATE=1
+GIT_PS1_SHOWUPSTREAM=1
+GIT_PS1_SHOWUNTRACKEDFILES=
+GIT_PS1_SHOWSTASHSTATE=1
+export PS1='[\[\033[1;32m\]\u\[\033[00m\]@\[\033[1;34m\]\w\[\033[00m\]]\[\033[1;31m\]$(__git_ps1)\[\033[00m\] \$ '
+
 # Alias
-alias ls='ls -G'
-
-# Prompt
-function prompt {
-  local BLACK="\[\033[0;30m\]"
-  local BLACKBOLD="\[\033[1;30m\]"
-  local RED="\[\033[0;31m\]"
-  local REDBOLD="\[\033[1;31m\]"
-  local GREEN="\[\033[0;32m\]"
-  local GREENBOLD="\[\033[1;32m\]"
-  local YELLOW="\[\033[0;33m\]"
-  local YELLOWBOLD="\[\033[1;33m\]"
-  local BLUE="\[\033[0;34m\]"
-  local BLUEBOLD="\[\033[1;34m\]"
-  local PURPLE="\[\033[0;35m\]"
-  local PURPLEBOLD="\[\033[1;35m\]"
-  local CYAN="\[\033[0;36m\]"
-  local CYANBOLD="\[\033[1;36m\]"
-  local WHITE="\[\033[0;37m\]"
-  local WHITEBOLD="\[\033[1;37m\]"
-  local RESETCOLOR="\[\e[00m\]"
-
-  export PS1="\n$WHITE[$RED\u$PURPLE@$GREEN\w$WHITE]$RESETCOLOR$GREENBOLD$ $RESETCOLOR"
-}
-
-prompt
+alias ls='ls -FhG'
+alias la='ls -lah'
+alias ll='ls -lh'
 
 # anyenv
 export PATH="$HOME/.anyenv/bin:$PATH"
