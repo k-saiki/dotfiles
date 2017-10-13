@@ -34,6 +34,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'thinca/vim-quickrun'
 Plug 'tyru/open-browser.vim'
 Plug 'rhysd/accelerated-jk'
+Plug 'ConradIrwin/vim-bracketed-paste'
 
 " Themes
 Plug 'tomasr/molokai'
