@@ -61,7 +61,6 @@ set number
 set cursorline
 set cursorcolumn
 set virtualedit=onemore
-set smartindent
 set visualbell
 set showmatch
 set laststatus=2
@@ -94,7 +93,11 @@ filetype plugin on
 filetype indent on
 
 " Colorscheme
-colorscheme molokai
+if &term == "xterm-256color"
+    colorscheme molokai
+    hi Comment ctermfg=102
+    hi Visual  ctermbg=236
+endif
 
 " ###############
 " Plugins setting
