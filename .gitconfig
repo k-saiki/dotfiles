@@ -4,3 +4,5 @@
 	cm = commit
 	see = browse
 	st = status
+[core]
+	editor = vim
