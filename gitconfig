@@ -1,0 +1,11 @@
+[include]
+	path = ~/.gitconfig.local
+[alias]
+	br  = branch
+	co  = checkout
+	cm  = commit
+	st  = status
+	see = browse
+	po  = !git push origin `git rev-parse --abbrev-ref HEAD`
+[core]
+	editor = vim

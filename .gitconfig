@@ -1,8 +1,0 @@
-[alias]
-	br = branch
-	co = checkout
-	cm = commit
-	see = browse
-	st = status
-[core]
-	editor = vim
