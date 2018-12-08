@@ -1,11 +1,15 @@
 [include]
 	path = ~/.gitconfig.local
 [alias]
+	st  = status
 	br  = branch
 	co  = checkout
 	cm  = commit
-	st  = status
-	see = browse
 	po  = !git push origin `git rev-parse --abbrev-ref HEAD`
+	a
+	see = browse
 [core]
 	editor = vim
+[credential]
+	helper = !aws codecommit credential-helper $@
+	UseHttpPath = true

@@ -17,13 +17,8 @@ alias sl='ls -FGh'
 alias ls='ls -FGh'
 alias la='ls -lah'
 alias ll='ls -lh'
+alias rm='rmtrash'
 alias diff='colordiff -u'
-alias checkip='curl https://checkip.amazonaws.com'
-
-# AWS CLI Alias
-alias aws-sts-whoami="aws sts get-caller-identity"
-alias aws-ec2-list="aws ec2 describe-instances --query 'sort_by(Reservations[].Instances[].{InstanceId:InstanceId, Tags:Tags[?Key==\`Name\`].Value|[0], InstanceType:InstanceType, State:State.Name, PublicIP:PublicIpAddress, PrivateIp:PrivateIpAddress, AZ:Placement.AvailabilityZone, Platform:Platform, VolId:BlockDeviceMappings[].Ebs.VolumeId|[0]}, &Tags)' --output table"
-alias aws-rds-list="aws rds describe-db-instances --query 'DBInstances[].{Name:DBInstanceIdentifier, InstanceType:DBInstanceClass, AZ:AvailabilityZone, Engine:Engine, MultiAZ:MultiAZ, StorageSize:AllocatedStorage, ID:DbiResourceId, Backup:PreferredBackupWindow, BackupPeriod:BackupRetentionPeriod, Maintenance:PreferredMaintenanceWindow}' --output table"
 
 # anyenv
 # https://github.com/riywo/anyenv
