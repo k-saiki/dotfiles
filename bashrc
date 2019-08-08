@@ -1,5 +1,6 @@
 export TERM=xterm-256color
-export HISTSIZE=10000
+HISTSIZE=10000
+HISTTIMEFORMAT='%Y/%m/%d %H:%M:%S '
 HISTIGNORE=history:ls:ll:la:cd
 
 # direnv
