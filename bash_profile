@@ -31,6 +31,7 @@ alias aws-windows-2016-latest='aws ssm get-parameters --names /aws/service/ami-w
 alias aws-windows-2019-latest='aws ssm get-parameters --names /aws/service/ami-windows-latest/Windows_Server-2019-Japanese-Full-Base'
 alias aws-amazonlinux-latest='aws ssm get-parameters --names /aws/service/ami-amazon-linux-latest/amzn-ami-hvm-x86_64-gp2'
 alias aws-amazonlinux2-latest='aws ssm get-parameters --names /aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2'
+alias aws-ecr-login='$(aws ecr get-login --no-include-email)'
 
 # anyenv
 # https://github.com/riywo/anyenv
