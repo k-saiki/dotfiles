@@ -1,14 +1,15 @@
 [include]
   path = ~/.gitconfig.local
 [alias]
-  st  = status
-  br  = branch
-  co  = checkout
-  cm  = commit
-  po  = !git push origin `git rev-parse --abbrev-ref HEAD`
-  gr  = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-  gra = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-  see = browse
+  st   = status
+  br   = branch
+  co   = checkout
+  cm   = commit
+  po   = !git push origin `git rev-parse --abbrev-ref HEAD`
+  size = count-objects -vH
+  gr   = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  gra  = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  see  = browse
 [core]
   editor = vim
 [credential]
