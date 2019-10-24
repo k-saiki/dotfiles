@@ -102,7 +102,7 @@ alias aws-amazonlinux2-latest='aws ssm get-parameters --names /aws/service/ami-a
 alias aws-ecr-login='$(aws ecr get-login --no-include-email)'
 
 # direnv
-eval "$(direnv hook bash)"
+eval "$(direnv hook zsh)"
 # anyenv
 export PATH="$HOME/.anyenv/bin:$PATH"
 eval "$(anyenv init -)"
