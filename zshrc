@@ -13,11 +13,31 @@ PROMPT+="%1(v|${fg[blue]}%1v${reset_color}|)"             # VCS branch
 PROMPT+="%2(v|${fg[yellow]}%2v${reset_color}|)"           # VCS status
 PROMPT+="%3(v|%${fg[red]}%3v${reset_color}|)"             # VCS error messages
 PROMPT+="$ "
-
-# Right prompt
+## Right prompt
 RPROMPT=
 
-# Eanble `add-zsh-hook`
+# zsh options
+setopt print_eight_bit
+setopt no_beep
+setopt no_flow_control
+setopt interactive_comments
+setopt auto_cd
+setopt auto_pushd
+setopt pushd_ignore_dups
+setopt extended_glob
+setopt hist_ignore_dups
+setopt extended_history
+setopt share_history
+setopt hist_ignore_all_dups
+setopt hist_ignore_space
+setopt hist_verify
+setopt hist_reduce_blanks
+setopt hist_save_no_dups
+setopt hist_no_store
+setopt hist_expand
+setopt inc_append_history
+
+# Eanble add-zsh-hook
 autoload -Uz add-zsh-hook
 
 # Prepare to show VCS information on prompt
@@ -61,17 +81,6 @@ add-zsh-hook chpwd __define_git_symbol
 HISTFILE=${HOME}/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
-setopt hist_ignore_dups
-setopt EXTENDED_HISTORY
-setopt share_history
-setopt hist_ignore_all_dups
-setopt hist_ignore_space
-setopt hist_verify
-setopt hist_reduce_blanks
-setopt hist_save_no_dups
-setopt hist_no_store
-setopt hist_expand
-setopt inc_append_history
 bindkey "^R" history-incremental-search-backward
 bindkey "^S" history-incremental-search-forward
 
