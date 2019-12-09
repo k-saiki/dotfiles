@@ -36,6 +36,7 @@ setopt hist_save_no_dups
 setopt hist_no_store
 setopt hist_expand
 setopt inc_append_history
+setopt nonomatch
 
 # Eanble add-zsh-hook
 autoload -Uz add-zsh-hook
@@ -110,6 +111,10 @@ alias aws-windows-2019-latest='aws ssm get-parameters --names /aws/service/ami-w
 alias aws-amazonlinux-latest='aws ssm get-parameters --names /aws/service/ami-amazon-linux-latest/amzn-ami-hvm-x86_64-gp2'
 alias aws-amazonlinux2-latest='aws ssm get-parameters --names /aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2'
 alias aws-ecr-login='$(aws ecr get-login --no-include-email)'
+
+# gcloud
+source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
+source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
 
 # direnv
 eval "$(direnv hook zsh)"
