@@ -116,14 +116,23 @@ alias aws-ecr-login='$(aws ecr get-login --no-include-email)'
 source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
 source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
 
+# kubectl
+source <(kubectl completion zsh)
+
 # direnv
 eval "$(direnv hook zsh)"
+
 # anyenv
 export PATH="$HOME/.anyenv/bin:$PATH"
 eval "$(anyenv init -)"
+
 # Golang
-export PATH="$GOPATH/bin:$PATH"
+eval "$(goenv init -)"
+export PATH="$GOROOT/bin:$PATH"
+export PATH="$PATH:$GOPATH/bin"
+
 # AWS CLI
 source /usr/local/share/zsh/site-functions/aws_zsh_completer.sh
+
 # hub
 eval "$(hub alias -s)"
