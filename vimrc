@@ -18,9 +18,6 @@ Plug 'fatih/vim-go'
 " Syntax
 Plug 'tpope/vim-markdown'
 
-" Linting
-Plug 'nvie/vim-flake8'
-
 " Looks
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'airblade/vim-gitgutter'
@@ -37,7 +34,7 @@ Plug 'rhysd/accelerated-jk'
 Plug 'ConradIrwin/vim-bracketed-paste'
 
 " Themes
-Plug 'tomasr/molokai'
+Plug 'altercation/vim-colors-solarized'
 
 call plug#end()
 
@@ -93,10 +90,15 @@ filetype plugin on
 filetype indent on
 
 " Colorscheme
-if &term == "xterm-256color"
-    colorscheme molokai
-    hi Comment ctermfg=102
-    hi Visual  ctermbg=236
+colorscheme solarized
+if &term =~ "xterm-256color" || "screen-256color"
+    set t_Co=256
+    set t_Sf=[3%dm
+    set t_Sb=[4%dm
+elseif &term =~ "xterm-color"
+    set t_Co=8
+    set t_Sf=[3%dm
+    set t_Sb=[4%dm
 endif
 
 " ###############
@@ -116,8 +118,9 @@ nnoremap <C-p> gT
 
 
 " vim-airline
-let g:airline_theme = 'molokai'
+let g:airline_theme = 'solarized'
 let g:airline_powerline_fonts = 1
+let g:airline_solarized_bg='dark'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_splits = 0
 let g:airline#extensions#tabline#show_tab_type = 0
