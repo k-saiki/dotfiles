@@ -104,6 +104,14 @@ alias ll='ls -lh'
 alias diff='colordiff -u'
 alias y2j='yq '\''.'\'''
 alias j2y='yq -y '\''.'\'''
+alias openssl-hash-cert='(){openssl x509 -noout -modulus -in $1 | md5}'
+alias openssl-hash-key='(){openssl rsa -noout -modulus -in $1 | md5}'
+alias openssl-hash-csr='(){openssl req -noout -modulus -in $1 | md5}'
+alias openssl-show-cert='(){openssl x509 -text -noout -in $1}'
+alias openssl-show-key='(){openssl rsa -text -noout -in $1}'
+alias openssl-show-csr='(){openssl req -text -noout -in $1}'
+alias brew='env PATH=${PATH//$(pyenv root)\/shims:/} brew'
+## AWS
 alias checkip='curl https://checkip.amazonaws.com'
 alias aws-windows-2012-latest='aws ssm get-parameters --names /aws/service/ami-windows-latest/Windows_Server-2012-R2_RTM-Japanese-64Bit-Base'
 alias aws-windows-2016-latest='aws ssm get-parameters --names /aws/service/ami-windows-latest/Windows_Server-2016-Japanese-Full-Base'
@@ -111,10 +119,6 @@ alias aws-windows-2019-latest='aws ssm get-parameters --names /aws/service/ami-w
 alias aws-amazonlinux-latest='aws ssm get-parameters --names /aws/service/ami-amazon-linux-latest/amzn-ami-hvm-x86_64-gp2'
 alias aws-amazonlinux2-latest='aws ssm get-parameters --names /aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2'
 alias aws-ecr-login='$(aws ecr get-login --no-include-email)'
-
-# gcloud
-source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
-source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
 
 # kubectl
 source <(kubectl completion zsh)
