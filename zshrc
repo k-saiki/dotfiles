@@ -101,6 +101,7 @@ alias sl='ls -FGh'
 alias ls='ls -FGh'
 alias la='ls -lah'
 alias ll='ls -lh'
+alias history-all='history -E 1'
 alias diff='colordiff -u'
 alias y2j='yq '\''.'\'''
 alias j2y='yq -y '\''.'\'''
@@ -118,7 +119,7 @@ alias aws-windows-2016-latest='aws ssm get-parameters --names /aws/service/ami-w
 alias aws-windows-2019-latest='aws ssm get-parameters --names /aws/service/ami-windows-latest/Windows_Server-2019-Japanese-Full-Base'
 alias aws-amazonlinux-latest='aws ssm get-parameters --names /aws/service/ami-amazon-linux-latest/amzn-ami-hvm-x86_64-gp2'
 alias aws-amazonlinux2-latest='aws ssm get-parameters --names /aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2'
-alias aws-ecr-login='$(aws ecr get-login --no-include-email)'
+alias aws-ecr-login='(){aws ecr get-login-password | docker login --username AWS --password-stdin $1}'
 
 # kubectl
 source <(kubectl completion zsh)
