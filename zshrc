@@ -120,6 +120,8 @@ alias aws-windows-2019-latest='aws ssm get-parameters --names /aws/service/ami-w
 alias aws-amazonlinux-latest='aws ssm get-parameters --names /aws/service/ami-amazon-linux-latest/amzn-ami-hvm-x86_64-gp2'
 alias aws-amazonlinux2-latest='aws ssm get-parameters --names /aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2'
 alias aws-ecr-login='(){aws ecr get-login-password | docker login --username AWS --password-stdin $1}'
+## Go
+alias gore='gore --autoimport'
 
 # kubectl
 source <(kubectl completion zsh)
