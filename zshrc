@@ -17,17 +17,14 @@ PROMPT+="$ "
 RPROMPT=
 
 # zsh options
-setopt print_eight_bit
-setopt no_beep
-setopt no_flow_control
-setopt interactive_comments
 setopt auto_cd
+setopt auto_menu
+setopt auto_param_keys
 setopt auto_pushd
-setopt pushd_ignore_dups
+setopt complete_in_word
 setopt extended_glob
-setopt hist_ignore_dups
 setopt extended_history
-setopt share_history
+setopt hist_ignore_dups
 setopt hist_ignore_all_dups
 setopt hist_ignore_space
 setopt hist_verify
@@ -36,7 +33,13 @@ setopt hist_save_no_dups
 setopt hist_no_store
 setopt hist_expand
 setopt inc_append_history
+setopt interactive_comments
 setopt nonomatch
+setopt no_beep
+setopt no_flow_control
+setopt print_eight_bit
+setopt pushd_ignore_dups
+setopt share_history
 
 # Eanble add-zsh-hook
 autoload -Uz add-zsh-hook
@@ -86,11 +89,19 @@ bindkey "^R" history-incremental-search-backward
 bindkey "^S" history-incremental-search-forward
 
 # Completion
-autoload -Uz compinit && compinit
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+  autoload -Uz compinit
+  compinit
+fi
+
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*' ignore-parents parent pwd ..
 zstyle ':completion:*:sudo:*' command-path $PATH
 zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
+
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Alias
 alias cp='nocorrect cp'
