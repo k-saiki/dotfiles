@@ -1,24 +1,27 @@
 [include]
-  path = ~/.gitconfig.local
+	path = ~/.gitconfig.local
 [alias]
-  st     = status
-  br     = branch
-  co     = checkout
-  cm     = commit
-  recm   = commit --amend
-  po     = !git push origin `git rev-parse --abbrev-ref HEAD`
-  diffh  = diff HEAD
-  diffhh = diff HEAD^
-  size   = count-objects -vH
-  gr     = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-  gra    = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-  see    = browse
-  ignore = "!gi() { curl -sL https://www.gitignore.io/api/$@ ;}; gi"
+	st     = status
+	br     = branch
+	co     = checkout
+	sw     = switch
+	re     = restore
+	cm     = commit
+	recm   = commit --amend
+	po     = !git push origin `git rev-parse --abbrev-ref HEAD`
+	diffh  = diff HEAD
+	diffhh = diff HEAD^
+	size   = count-objects -vH
+	gr     = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	gra    = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	see    = browse
+	ignore = "!gi() { curl -sL https://www.gitignore.io/api/$@ ;}; gi"
 [core]
-  editor = vim
+	editor = vim
 [credential]
-  helper = !aws codecommit credential-helper $@
-  UseHttpPath = true
+	helper = osxkeychain
+	helper = !aws codecommit credential-helper $@
+	UseHttpPath = true
 [init]
 	templatedir = ~/.git-templates/secrets
 [secrets]
