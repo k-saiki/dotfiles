@@ -17,6 +17,7 @@
 	gra    = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 	see    = browse
 	ignore = "!gi() { curl -sL https://www.gitignore.io/api/$@ ;}; gi"
+	delete-merged-branch = "!f () { git branch --merged | egrep -v '\\*|master|develop' | xargs git branch -d; }; f"
 [core]
 	editor = vim
 [credential]
