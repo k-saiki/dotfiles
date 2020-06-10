@@ -9,6 +9,7 @@
 	cm     = commit
 	recm   = commit --amend
 	po     = !git push origin `git rev-parse --abbrev-ref HEAD`
+	pot    = push origin --tags
 	diffh  = diff HEAD
 	diffhh = diff HEAD^
 	size   = count-objects -vH

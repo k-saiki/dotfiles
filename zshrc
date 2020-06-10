@@ -114,6 +114,7 @@ alias la='ls -lah'
 alias ll='ls -lh'
 alias history-all='history -E 1'
 alias diff='colordiff -u'
+alias jq-paths='jq -c paths'
 alias y2j='yq read --prettyPrint --tojson'
 alias j2y='yq read --prettyPrint'
 alias openssl-hash-cert='(){openssl x509 -noout -modulus -in $1 | md5}'
@@ -123,6 +124,7 @@ alias openssl-show-cert='(){openssl x509 -text -noout -in $1}'
 alias openssl-show-key='(){openssl rsa -text -noout -in $1}'
 alias openssl-show-csr='(){openssl req -text -noout -in $1}'
 alias brew='env PATH=${PATH//$(pyenv root)\/shims:/} brew'
+
 ## AWS
 alias checkip='curl https://checkip.amazonaws.com'
 alias aws-windows-2012-latest='aws ssm get-parameters --names /aws/service/ami-windows-latest/Windows_Server-2012-R2_RTM-Japanese-64Bit-Base'
@@ -130,7 +132,13 @@ alias aws-windows-2016-latest='aws ssm get-parameters --names /aws/service/ami-w
 alias aws-windows-2019-latest='aws ssm get-parameters --names /aws/service/ami-windows-latest/Windows_Server-2019-Japanese-Full-Base'
 alias aws-amazonlinux-latest='aws ssm get-parameters --names /aws/service/ami-amazon-linux-latest/amzn-ami-hvm-x86_64-gp2'
 alias aws-amazonlinux2-latest='aws ssm get-parameters --names /aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2'
-alias aws-ecr-login='(){aws ecr get-login-password | docker login --username AWS --password-stdin $1}'
+
+# function
+aws-ecr-login() {
+  account_id=$(aws sts get-caller-identity | jq -r .Account)
+  aws ecr get-login-password | docker login --username AWS --password-stdin ${account_id}.dkr.ecr.ap-northeast-1.amazonaws.com
+}
+
 ## Go
 alias gore='gore --autoimport'
 
