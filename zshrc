@@ -139,11 +139,8 @@ aws-ecr-login() {
   aws ecr get-login-password | docker login --username AWS --password-stdin ${account_id}.dkr.ecr.ap-northeast-1.amazonaws.com
 }
 
-## Go
+# Go
 alias gore='gore --autoimport'
-
-# kubectl
-source <(kubectl completion zsh)
 
 # direnv
 eval "$(direnv hook zsh)"
@@ -156,9 +153,6 @@ eval "$(anyenv init -)"
 eval "$(goenv init -)"
 export PATH="$GOROOT/bin:$PATH"
 export PATH="$PATH:$GOPATH/bin"
-
-# AWS CLI
-source /usr/local/share/zsh/site-functions/aws_zsh_completer.sh
 
 # hub
 eval "$(hub alias -s)"
