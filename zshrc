@@ -136,7 +136,7 @@ alias aws-amazonlinux2-latest='aws ssm get-parameters --names /aws/service/ami-a
 # function
 aws-ecr-login() {
   account_id=$(aws sts get-caller-identity | jq -r .Account)
-  aws ecr get-login-password | docker login --username AWS --password-stdin ${account_id}.dkr.ecr.ap-northeast-1.amazonaws.com
+  aws ecr get-login-password | docker login --username AWS --password-stdin ${account_id}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com
 }
 
 # Go
@@ -156,3 +156,8 @@ export PATH="$PATH:$GOPATH/bin"
 
 # hub
 eval "$(hub alias -s)"
+
+# kubectl
+source <(kubectl completion zsh)
+alias k=kubectl
+complete -o default -F __start_kubectl k
