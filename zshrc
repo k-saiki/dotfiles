@@ -1,6 +1,32 @@
 # Environment
 export LANG=ja_JP.UTF-8
 
+# zsh options
+# see http://zsh.sourceforge.net/Doc/Release/Options.html
+setopt auto_cd
+setopt auto_menu
+setopt auto_param_keys
+setopt auto_pushd
+setopt complete_in_word
+setopt extended_glob
+setopt extended_history
+setopt hist_ignore_dups
+setopt hist_ignore_all_dups
+setopt hist_ignore_space
+setopt hist_verify
+setopt hist_reduce_blanks
+setopt hist_save_no_dups
+setopt hist_no_store
+setopt hist_expand
+setopt inc_append_history
+setopt share_history
+setopt interactive_comments
+setopt nonomatch
+setopt no_beep
+setopt no_flow_control
+setopt print_eight_bit
+setopt pushd_ignore_dups
+
 # Prompt
 ## Enable color
 autoload -Uz colors && colors
@@ -15,33 +41,6 @@ PROMPT+="%3(v|%${fg[red]}%3v${reset_color}|)"             # VCS error messages
 PROMPT+="$ "
 ## Right prompt
 RPROMPT=
-
-# zsh options
-setopt auto_cd
-setopt auto_menu
-setopt auto_param_keys
-setopt auto_pushd
-setopt complete_in_word
-setopt extended_glob
-
-setopt extended_history
-setopt hist_ignore_dups
-setopt hist_ignore_all_dups
-setopt hist_ignore_space
-setopt hist_verify
-setopt hist_reduce_blanks
-setopt hist_save_no_dups
-setopt hist_no_store
-setopt hist_expand
-setopt inc_append_history
-setopt share_history
-
-setopt interactive_comments
-setopt nonomatch
-setopt no_beep
-setopt no_flow_control
-setopt print_eight_bit
-setopt pushd_ignore_dups
 
 # Eanble add-zsh-hook
 autoload -Uz add-zsh-hook
