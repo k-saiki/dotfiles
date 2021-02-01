@@ -23,6 +23,7 @@ setopt auto_param_keys
 setopt auto_pushd
 setopt complete_in_word
 setopt extended_glob
+
 setopt extended_history
 setopt hist_ignore_dups
 setopt hist_ignore_all_dups
@@ -33,13 +34,14 @@ setopt hist_save_no_dups
 setopt hist_no_store
 setopt hist_expand
 setopt inc_append_history
+setopt share_history
+
 setopt interactive_comments
 setopt nonomatch
 setopt no_beep
 setopt no_flow_control
 setopt print_eight_bit
 setopt pushd_ignore_dups
-setopt share_history
 
 # Eanble add-zsh-hook
 autoload -Uz add-zsh-hook
@@ -83,25 +85,24 @@ add-zsh-hook chpwd __define_git_symbol
 
 # History
 HISTFILE=${HOME}/.zsh_history
-HISTSIZE=1000000
+HISTSIZE=100000
 SAVEHIST=1000000
 bindkey "^R" history-incremental-search-backward
 bindkey "^S" history-incremental-search-forward
 
 # Completion
 if type brew &>/dev/null; then
-  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-  autoload -Uz compinit
-  compinit
+  HOMEBREW_PREFIX=$(brew --prefix)
+  source ${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+  source ${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  FPATH=${HOMEBREW_PREFIX}/share/zsh-completions:$FPATH
+  autoload -Uz compinit && compinit
 fi
 
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*' ignore-parents parent pwd ..
 zstyle ':completion:*:sudo:*' command-path $PATH
 zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
-
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Alias
 alias cp='nocorrect cp'
@@ -117,13 +118,6 @@ alias diff='colordiff -u'
 alias jq-paths='jq -c paths'
 alias y2j='yq read --prettyPrint --tojson'
 alias j2y='yq read --prettyPrint'
-alias openssl-hash-cert='(){openssl x509 -noout -modulus -in $1 | md5}'
-alias openssl-hash-key='(){openssl rsa -noout -modulus -in $1 | md5}'
-alias openssl-hash-csr='(){openssl req -noout -modulus -in $1 | md5}'
-alias openssl-show-cert='(){openssl x509 -text -noout -in $1}'
-alias openssl-show-key='(){openssl rsa -text -noout -in $1}'
-alias openssl-show-csr='(){openssl req -text -noout -in $1}'
-alias brew='env PATH=${PATH//$(pyenv root)\/shims:/} brew'
 
 ## AWS
 alias checkip='curl https://checkip.amazonaws.com'
@@ -139,23 +133,17 @@ aws-ecr-login() {
   aws ecr get-login-password | docker login --username AWS --password-stdin ${account_id}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com
 }
 
-# Go
-alias gore='gore --autoimport'
-
-# direnv
-eval "$(direnv hook zsh)"
-
-# anyenv
-export PATH="$HOME/.anyenv/bin:$PATH"
-eval "$(anyenv init -)"
-
-# Golang
-eval "$(goenv init -)"
-export PATH="$GOROOT/bin:$PATH"
-export PATH="$PATH:$GOPATH/bin"
+# Homebrew
+export PATH="/usr/local/sbin:$PATH"
 
 # hub
 eval "$(hub alias -s)"
+
+# asdf
+source $(brew --prefix asdf)/asdf.sh
+
+# direnv
+eval "$(direnv hook zsh)"
 
 # kubectl
 source <(kubectl completion zsh)
