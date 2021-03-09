@@ -1,7 +1,7 @@
 .DEFAULT_GOAL := help
 
 CURRENT_DIR  = $(shell pwd)
-IGNORE_FILES = Makefile Brewfile
+IGNORE_FILES = Makefile Brewfile vscode
 
 help: ## Print this message ## make help
 	@echo "Usage: make SUB_COMMAND"
@@ -30,7 +30,7 @@ setup-vscode: ## Install VSCode extensions ## make setup-vscode
 			code --install-extension $$extention; \
 		done; \
 	else \
-		echo "Please install VSCode"; \
+		echo "Please install vscode"; \
 	fi
 
 symlink: ## Install dotfiles to home directory ## make symlink
