@@ -9,6 +9,7 @@ setopt auto_param_keys
 setopt auto_pushd
 setopt complete_in_word
 setopt extended_glob
+
 setopt extended_history
 setopt hist_ignore_dups
 setopt hist_ignore_all_dups
@@ -17,9 +18,10 @@ setopt hist_verify
 setopt hist_reduce_blanks
 setopt hist_save_no_dups
 setopt hist_no_store
-setopt hist_expand
 setopt inc_append_history
 setopt share_history
+
+setopt hist_expand
 setopt interactive_comments
 setopt nonomatch
 setopt no_beep
@@ -89,6 +91,15 @@ SAVEHIST=1000000
 bindkey "^R" history-incremental-search-backward
 bindkey "^S" history-incremental-search-forward
 
+# Homebrew
+## macOS
+if [ $(uname -s) = "Darwin" ]; then
+  eval $(/usr/local/bin/brew shellenv)
+## Ubuntu
+elif [ -f /etc/lsb-release ]; then
+  eval $(~/.linuxbrew/bin/brew shellenv)
+fi
+
 # Completion
 if type brew &>/dev/null; then
   HOMEBREW_PREFIX=$(brew --prefix)
@@ -118,25 +129,20 @@ alias jq-paths='jq -c paths'
 alias y2j='yq read --prettyPrint --tojson'
 alias j2y='yq read --prettyPrint'
 
-## AWS
-alias checkip='curl https://checkip.amazonaws.com'
-alias aws-windows-2012-latest='aws ssm get-parameters --names /aws/service/ami-windows-latest/Windows_Server-2012-R2_RTM-Japanese-64Bit-Base'
-alias aws-windows-2016-latest='aws ssm get-parameters --names /aws/service/ami-windows-latest/Windows_Server-2016-Japanese-Full-Base'
-alias aws-windows-2019-latest='aws ssm get-parameters --names /aws/service/ami-windows-latest/Windows_Server-2019-Japanese-Full-Base'
-alias aws-amazonlinux-latest='aws ssm get-parameters --names /aws/service/ami-amazon-linux-latest/amzn-ami-hvm-x86_64-gp2'
-alias aws-amazonlinux2-latest='aws ssm get-parameters --names /aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2'
-
-# function
-aws-ecr-login() {
-  account_id=$(aws sts get-caller-identity | jq -r .Account)
-  aws ecr get-login-password | docker login --username AWS --password-stdin ${account_id}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com
-}
-
-# Homebrew
-export PATH="/usr/local/sbin:$PATH"
-
-# hub
+# GitHub CLI, hub
+source <(gh completion -s zsh)
 eval "$(hub alias -s)"
+
+# direnv
+eval "$(direnv hook zsh)"
+
+# asdf
+source $(brew --prefix asdf)/asdf.sh
+
+# Golang
+export PATH="$GOROOT/bin:$PATH"
+export PATH="$PATH:$GOPATH/bin"
+alias gore='gore --autoimport'
 
 # asdf
 source $(brew --prefix asdf)/asdf.sh
