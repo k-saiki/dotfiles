@@ -1,6 +1,33 @@
 # Environment
 export LANG=ja_JP.UTF-8
 
+# zsh options
+setopt auto_cd
+setopt auto_menu
+setopt auto_param_keys
+setopt auto_pushd
+setopt complete_in_word
+setopt extended_glob
+
+setopt extended_history
+setopt hist_ignore_dups
+setopt hist_ignore_all_dups
+setopt hist_ignore_space
+setopt hist_verify
+setopt hist_reduce_blanks
+setopt hist_save_no_dups
+setopt hist_no_store
+setopt inc_append_history
+setopt share_history
+
+setopt hist_expand
+setopt interactive_comments
+setopt nonomatch
+setopt no_beep
+setopt no_flow_control
+setopt print_eight_bit
+setopt pushd_ignore_dups
+
 # Prompt
 ## Enable color
 autoload -Uz colors && colors
@@ -15,31 +42,6 @@ PROMPT+="%3(v|%${fg[red]}%3v${reset_color}|)"             # VCS error messages
 PROMPT+="$ "
 ## Right prompt
 RPROMPT=
-
-# zsh options
-setopt auto_cd
-setopt auto_menu
-setopt auto_param_keys
-setopt auto_pushd
-setopt complete_in_word
-setopt extended_glob
-setopt extended_history
-setopt hist_ignore_dups
-setopt hist_ignore_all_dups
-setopt hist_ignore_space
-setopt hist_verify
-setopt hist_reduce_blanks
-setopt hist_save_no_dups
-setopt hist_no_store
-setopt hist_expand
-setopt inc_append_history
-setopt interactive_comments
-setopt nonomatch
-setopt no_beep
-setopt no_flow_control
-setopt print_eight_bit
-setopt pushd_ignore_dups
-setopt share_history
 
 # Eanble add-zsh-hook
 autoload -Uz add-zsh-hook
@@ -83,25 +85,33 @@ add-zsh-hook chpwd __define_git_symbol
 
 # History
 HISTFILE=${HOME}/.zsh_history
-HISTSIZE=1000000
+HISTSIZE=100000
 SAVEHIST=1000000
 bindkey "^R" history-incremental-search-backward
 bindkey "^S" history-incremental-search-forward
 
+# Homebrew
+## macOS
+if [ $(uname -s) = "Darwin" ]; then
+  eval $(/usr/local/bin/brew shellenv)
+## Ubuntu
+elif [ -f /etc/lsb-release ]; then
+  eval $(~/.linuxbrew/bin/brew shellenv)
+fi
+
 # Completion
 if type brew &>/dev/null; then
-  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-  autoload -Uz compinit
-  compinit
+  HOMEBREW_PREFIX=$(brew --prefix)
+  source ${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+  source ${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  FPATH=${HOMEBREW_PREFIX}/share/zsh-completions:$FPATH
+  autoload -Uz compinit && compinit
 fi
 
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*' ignore-parents parent pwd ..
 zstyle ':completion:*:sudo:*' command-path $PATH
 zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
-
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Alias
 alias cp='nocorrect cp'
@@ -117,45 +127,21 @@ alias diff='colordiff -u'
 alias jq-paths='jq -c paths'
 alias y2j='yq read --prettyPrint --tojson'
 alias j2y='yq read --prettyPrint'
-alias openssl-hash-cert='(){openssl x509 -noout -modulus -in $1 | md5}'
-alias openssl-hash-key='(){openssl rsa -noout -modulus -in $1 | md5}'
-alias openssl-hash-csr='(){openssl req -noout -modulus -in $1 | md5}'
-alias openssl-show-cert='(){openssl x509 -text -noout -in $1}'
-alias openssl-show-key='(){openssl rsa -text -noout -in $1}'
-alias openssl-show-csr='(){openssl req -text -noout -in $1}'
-alias brew='env PATH=${PATH//$(pyenv root)\/shims:/} brew'
 
-## AWS
-alias checkip='curl https://checkip.amazonaws.com'
-alias aws-windows-2012-latest='aws ssm get-parameters --names /aws/service/ami-windows-latest/Windows_Server-2012-R2_RTM-Japanese-64Bit-Base'
-alias aws-windows-2016-latest='aws ssm get-parameters --names /aws/service/ami-windows-latest/Windows_Server-2016-Japanese-Full-Base'
-alias aws-windows-2019-latest='aws ssm get-parameters --names /aws/service/ami-windows-latest/Windows_Server-2019-Japanese-Full-Base'
-alias aws-amazonlinux-latest='aws ssm get-parameters --names /aws/service/ami-amazon-linux-latest/amzn-ami-hvm-x86_64-gp2'
-alias aws-amazonlinux2-latest='aws ssm get-parameters --names /aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2'
-
-# function
-aws-ecr-login() {
-  account_id=$(aws sts get-caller-identity | jq -r .Account)
-  aws ecr get-login-password | docker login --username AWS --password-stdin ${account_id}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com
-}
-
-# Go
-alias gore='gore --autoimport'
+# GitHub CLI, hub
+source <(gh completion -s zsh)
+eval "$(hub alias -s)"
 
 # direnv
 eval "$(direnv hook zsh)"
 
-# anyenv
-export PATH="$HOME/.anyenv/bin:$PATH"
-eval "$(anyenv init -)"
+# asdf
+source $(brew --prefix asdf)/asdf.sh
 
 # Golang
-eval "$(goenv init -)"
 export PATH="$GOROOT/bin:$PATH"
 export PATH="$PATH:$GOPATH/bin"
-
-# hub
-eval "$(hub alias -s)"
+alias gore='gore --autoimport'
 
 # kubectl
 source <(kubectl completion zsh)

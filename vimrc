@@ -90,6 +90,7 @@ filetype plugin on
 filetype indent on
 
 " Colorscheme
+set background=dark
 colorscheme solarized
 if &term =~ "xterm-256color" || "screen-256color"
     set t_Co=256

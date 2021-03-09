@@ -1,0 +1,16 @@
+{
+    "terminal.external.windowsExec": "C:\\Windows\\Sysnative\\bash.exe",
+    "terminal.integrated.shell.windows": "C:\\Windows\\Sysnative\\bash.exe",
+    "files.autoSave": "afterDelay",
+    "window.zoomLevel": 0,
+    "terminal.integrated.allowChords": false,
+    "editor.fontFamily": "Cica",
+    "workbench.colorTheme": "Solarized Dark",
+    "terminal.integrated.fontFamily": "Cica",
+    "diffEditor.codeLens": true,
+    "editor.renderWhitespace": "all",
+    "editor.renderControlCharacters": true,
+    "editor.renderLineHighlightOnlyWhenFocus": true,
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true
+}
