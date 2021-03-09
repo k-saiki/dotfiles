@@ -2,6 +2,7 @@
 export LANG=ja_JP.UTF-8
 
 # zsh options
+# see http://zsh.sourceforge.net/Doc/Release/Options.html
 setopt auto_cd
 setopt auto_menu
 setopt auto_param_keys
@@ -142,6 +143,12 @@ source $(brew --prefix asdf)/asdf.sh
 export PATH="$GOROOT/bin:$PATH"
 export PATH="$PATH:$GOPATH/bin"
 alias gore='gore --autoimport'
+
+# asdf
+source $(brew --prefix asdf)/asdf.sh
+
+# direnv
+eval "$(direnv hook zsh)"
 
 # kubectl
 source <(kubectl completion zsh)

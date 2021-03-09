@@ -12,8 +12,8 @@ brew "awscli"
 brew "circleci"
 brew "colordiff"
 brew "direnv"
-brew "docker"
-brew "docker-compose"
+brew "docker", link: false
+brew "docker-compose", link: false
 brew "git"
 brew "hub"
 brew "jq"
