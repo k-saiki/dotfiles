@@ -28,3 +28,5 @@
 	ff = false
 [pull]
 	ff = only
+[credential "https://github.com"]
+	helper = !gh auth git-credential

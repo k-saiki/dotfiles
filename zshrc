@@ -9,7 +9,6 @@ setopt auto_param_keys
 setopt auto_pushd
 setopt complete_in_word
 setopt extended_glob
-
 setopt extended_history
 setopt hist_ignore_dups
 setopt hist_ignore_all_dups
@@ -20,7 +19,6 @@ setopt hist_save_no_dups
 setopt hist_no_store
 setopt inc_append_history
 setopt share_history
-
 setopt hist_expand
 setopt interactive_comments
 setopt nonomatch
@@ -33,14 +31,14 @@ setopt pushd_ignore_dups
 ## Enable color
 autoload -Uz colors && colors
 ## Left prompt
-PROMPT="${fg[cyan]}[%D{%Y-%m-%d %H:%M:%S}]${reset_color}" # Timestamp
-PROMPT+="${fg[yellow]}%n${reset_color}@"                  # Username
-PROMPT+="${fg[green]}%~${reset_color} "                   # Directory
+PROMPT="%{${fg[cyan]}%}[%D{%Y-%m-%d %H:%M:%S}($(date +%Z))]%{${reset_color}%} " # Timestamp
+PROMPT+="%{${fg[yellow]}%}%n%{${reset_color}%}@"                                # Username
+PROMPT+="%{${fg[green]}%}%~%{${reset_color}%}"                                  # Current directory
 PROMPT+=$'\n'
-PROMPT+="%1(v|${fg[blue]}%1v${reset_color}|)"             # VCS branch
-PROMPT+="%2(v|${fg[yellow]}%2v${reset_color}|)"           # VCS status
-PROMPT+="%3(v|%${fg[red]}%3v${reset_color}|)"             # VCS error messages
-PROMPT+="$ "
+PROMPT+="%1(v|%{${fg[blue]}%}%1v%{${reset_color}%}|)"                           # VCS branch
+PROMPT+="%2(v|%{${fg[yellow]}%}%2v%{${reset_color}%}|)"                         # VCS status
+PROMPT+="%3(v|%{${fg[red]}%}%3v%{${reset_color}%}|)"                            # VCS error messages
+PROMPT+=" $ "
 ## Right prompt
 RPROMPT=
 
@@ -70,19 +68,13 @@ zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' check-for-staged-changes true
 
 # vcs_info for Git
+readonly GIT_SYMBOL=''
 readonly GIT_STAGED_SYMBOL='⇡'
 readonly GIT_UNSTAGED_SYMBOL='⇣'
 zstyle ':vcs_info:git:*' stagedstr ${GIT_STAGED_SYMBOL}
 zstyle ':vcs_info:git:*' unstagedstr ${GIT_UNSTAGED_SYMBOL}
-__define_git_symbol() {
-  if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) != 'true' ]]; then
-    return 1
-  fi
-  GIT_SYMBOL=''
-  zstyle ':vcs_info:git:*' formats "${GIT_SYMBOL} %b" '%u%c'
-  zstyle ':vcs_info:git:*' actionformats "${GIT_SYMBOL} %b" '%u%c %m' '<!%a>'
-}
-add-zsh-hook chpwd __define_git_symbol
+zstyle ':vcs_info:git:*' formats "${GIT_SYMBOL} %b" '%u%c'
+zstyle ':vcs_info:git:*' actionformats "${GIT_SYMBOL} %b" '%u%c %m' '<!%a>'
 
 # History
 HISTFILE=${HOME}/.zsh_history
@@ -113,6 +105,7 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*' ignore-parents parent pwd ..
 zstyle ':completion:*:sudo:*' command-path $PATH
 zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
+zstyle ':completion:*:make:*' tag-order targets
 
 # Alias
 alias cp='nocorrect cp'
