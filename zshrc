@@ -89,7 +89,7 @@ if [ $(uname -s) = "Darwin" ]; then
   eval $(/usr/local/bin/brew shellenv)
 ## Ubuntu
 elif [ -f /etc/lsb-release ]; then
-  eval $(~/.linuxbrew/bin/brew shellenv)
+  eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 fi
 
 # Completion

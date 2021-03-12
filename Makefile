@@ -1,5 +1,6 @@
 .DEFAULT_GOAL := help
 
+CURRENT_USER = $(shell whoami)
 CURRENT_DIR  = $(shell pwd)
 IGNORE_FILES = Makefile Brewfile vscode
 
@@ -10,12 +11,10 @@ help: ## Print this message ## make help
 	@printf "\033[36m%-30s\033[0m %-50s %s\n" "[Sub command]" "[Description]" "[Example]"
 	@grep -E '^[/a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | perl -pe 's%^([/a-zA-Z_-]+):.*?(##)%$$1 $$2%' | awk -F " *?## *?" '{printf "\033[36m%-30s\033[0m %-50s %s\n", $$1, $$2, $$3}'
 
-setup-brew: ## Install Homebrew for Ubuntu ## make setup-brew
+setup-brew: ## Install Homebrew for WSL ## make setup-brew
 	@if [ -f /etc/lsb-release ] && !(type brew > /dev/null 2>&1); then \
 		sudo apt install -y build-essential curl file git; \
-		git clone https://github.com/Homebrew/brew ~/.linuxbrew/Homebrew; \
-		mkdir ~/.linuxbrew/bin; \
-		ln -s ~/.linuxbrew/Homebrew/bin/brew ~/.linuxbrew/bin; \
+		bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"; \
 	fi
 
 setup-vim: ## Install vim-plug ## make setup-vim
