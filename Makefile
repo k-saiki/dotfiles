@@ -1,6 +1,5 @@
 .DEFAULT_GOAL := help
 
-CURRENT_USER = $(shell whoami)
 CURRENT_DIR  = $(shell pwd)
 IGNORE_FILES = Makefile Brewfile vscode
 
