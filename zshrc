@@ -137,12 +137,6 @@ export PATH="$GOROOT/bin:$PATH"
 export PATH="$PATH:$GOPATH/bin"
 alias gore='gore --autoimport'
 
-# asdf
-source $(brew --prefix asdf)/asdf.sh
-
-# direnv
-eval "$(direnv hook zsh)"
-
 # kubectl
 source <(kubectl completion zsh)
 alias k=kubectl

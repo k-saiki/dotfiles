@@ -34,7 +34,7 @@ Plug 'rhysd/accelerated-jk'
 Plug 'ConradIrwin/vim-bracketed-paste'
 
 " Themes
-Plug 'altercation/vim-colors-solarized'
+" Plug 'altercation/vim-colors-solarized'
 
 call plug#end()
 
@@ -91,7 +91,7 @@ filetype indent on
 
 " Colorscheme
 set background=dark
-colorscheme solarized
+" colorscheme solarized
 if &term =~ "xterm-256color" || "screen-256color"
     set t_Co=256
     set t_Sf=[3%dm
