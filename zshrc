@@ -97,7 +97,7 @@ if type brew &>/dev/null; then
   HOMEBREW_PREFIX=$(brew --prefix)
   source ${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
   source ${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-  FPATH=${HOMEBREW_PREFIX}/share/zsh-completions:$FPATH
+  FPATH=${HOMEBREW_PREFIX}/share/zsh/site-functions:$FPATH
   autoload -Uz compinit && compinit
 fi
 
@@ -133,8 +133,6 @@ eval "$(direnv hook zsh)"
 source $(brew --prefix asdf)/asdf.sh
 
 # Golang
-export PATH="$GOROOT/bin:$PATH"
-export PATH="$PATH:$GOPATH/bin"
 alias gore='gore --autoimport'
 
 # kubectl
